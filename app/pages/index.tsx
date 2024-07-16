@@ -1,6 +1,7 @@
 import SubscriptionPricing from '@/components/SubscriptionPricing';
 import AboutUs from '@/components/AboutUs';
 import Features from '@/components/Features';
+import BlogPost from './blog_post';
 
 const Index = () => {
   return (
@@ -14,6 +15,7 @@ const Index = () => {
           </button>
         </div>
       </section>
+      <BlogPost/>
       <SubscriptionPricing />
       <AboutUs />
       <Features />
