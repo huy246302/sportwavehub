@@ -1,7 +1,9 @@
-export default async function Index() {
+import Index from "./pages";
+
+export default async function Page() {
   return (
-    <div>>
-      Hello
+    <div>
+      <Index/>
     </div>
   );
 }
