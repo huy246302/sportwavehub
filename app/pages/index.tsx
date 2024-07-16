@@ -16,19 +16,19 @@ const Index = () => {
             </div>
         </section>
 
-        <section className="py-12 my-4"> {/* Add padding here */}
+        <section className="py-12 my-5"> {/* Add padding here */}
             <BlogPost />
         </section>
 
-        <section className="py-12 my-4"> {/* Add padding here */}
+        <section className="py-12 my-5"> {/* Add padding here */}
             <SubscriptionPricing />
         </section>
 
-        <section className="py-12 my-4"> {/* Add padding here */}
+        <section className="py-12 my-5"> {/* Add padding here */}
             <AboutUs />
         </section>
 
-        <section className="py-12 my-4"> {/* Add padding here */}
+        <section className="py-12 my-5"> {/* Add padding here */}
             <Features />
         </section>
     </div>

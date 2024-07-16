@@ -45,24 +45,16 @@ const BlogPost = () => {
     dots: true,
     infinite: true,
     speed: 500,
-    slidesToShow: 3,
+    slidesToShow: 1,
     slidesToScroll: 1,
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 1,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
-        },
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
-          initialSlide: 1,
         },
       },
     ],
@@ -76,7 +68,11 @@ const BlogPost = () => {
           <div key={post.id} className="bg-white rounded shadow-md p-4 mb-4">
             <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
             <p className="text-gray-700 mb-2">{post.content}</p>
-            {post.img && <img src={post.img} alt={post.title} className="rounded-lg mb-2" />}
+            {post.img && <img src={post.img} alt={post.title} className="rounded-lg mb-2" style={{
+                height: '250px',
+                width: '75%',
+                margin: 'auto',
+            }}/>}
             <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
           </div>
         ))}
