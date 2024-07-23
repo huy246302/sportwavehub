@@ -2,12 +2,12 @@
 
 // pages/blog_post.tsx
 import { useEffect, useState } from 'react';
-import { createClient } from '../../utils/supabase/client';
+import { createClient } from '../utils/supabase/client';
 import { PostgrestError } from '@supabase/supabase-js';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import '../../styles/globals.css';
+import '../styles/globals.css';
 
 const supabase = createClient();
 
@@ -19,7 +19,7 @@ interface BlogPost {
   created_at: string;
 }
 
-const BlogPost = () => {
+const Carousel = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
 
   useEffect(() => {
@@ -88,4 +88,4 @@ const BlogPost = () => {
   );
 };
 
-export default BlogPost;
+export default Carousel;

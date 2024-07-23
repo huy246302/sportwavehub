@@ -1,7 +1,7 @@
 import SubscriptionPricing from '@/components/SubscriptionPricing';
 import AboutUs from '@/components/AboutUs';
 import Features from '@/components/Features';
-import BlogPost from './blog_post';
+import Carousel from '@/components/Carousel';
 import HeroSection from '@/components/HeroSection';
 
 const Index = () => {
@@ -12,7 +12,7 @@ const Index = () => {
         </section>
 
         <section className="py-12 my-5"> {/* Add padding here */}
-            <BlogPost />
+            <Carousel />
         </section>
 
         <section className="py-12 my-5"> {/* Add padding here */}
