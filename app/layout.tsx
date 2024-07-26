@@ -1,50 +1,27 @@
-// app/layout.tsx
-
 import { GeistSans } from "geist/font/sans";
 import "../styles/globals.css";
-import Header from '../components/Header';
-import Footer from '../components/Footer';
-import { headers } from 'next/headers';
-import React from 'react';
+import ConditionalLayout from "../components/ConditionalLayout";
+import React from "react";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
-  : 'http://localhost:3000';
+  : "http://localhost:3000";
 
 export const metadata = {
   metadataBase: new URL(defaultUrl),
-  title: 'Next.js and Supabase Starter Kit',
-  description: 'The fastest way to build apps with Next.js and Supabase',
+  title: "Next.js and Supabase Starter Kit",
+  description: "The fastest way to build apps with Next.js and Supabase",
 };
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export default async function RootLayout({ children }: LayoutProps) {
-  const headersList = headers();
-  const pathname = headersList.get('x-pathname');
-
-  if (pathname === '/login') {
-    return (
-      <html lang="en" className={GeistSans.className}>
-        <body className="bg-login-background text-login-foreground">
-          <main className="min-h-screen flex flex-col items-center justify-center">
-            {children}
-          </main>
-        </body>
-      </html>
-    );
-  }
-
+export default function RootLayout({ children }: LayoutProps) {
   return (
     <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <Header />
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
-        <Footer />
+      <body>
+        <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
   );
