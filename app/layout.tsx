@@ -3,6 +3,7 @@ import "../styles/globals.css";
 import ConditionalLayout from "../components/ConditionalLayout";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react"
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -23,6 +24,7 @@ export default function RootLayout({ children }: LayoutProps) {
     <html lang="en" className={GeistSans.className}>
       <body>
         <SpeedInsights/>
+        <Analytics/>
         <ConditionalLayout>{children}</ConditionalLayout>
       </body>
     </html>
