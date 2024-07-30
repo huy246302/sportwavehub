@@ -8,6 +8,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '@/styles/globals.css';
+import Link from 'next/link';
 
 const supabase = createClient();
 
@@ -80,17 +81,19 @@ const Carousel = () => {
       <h1 className="text-3xl font-semibold mb-4 text-center">Blog Posts</h1>
       <Slider {...carouselSettings}>
         {blogPosts.map((post) => (
-          <div key={post.id} className="p-4 blog-post-card">
-            {post.img && (
-              <img
-                src={post.img}
-                alt={post.title}
-                className="rounded-lg mb-2 blog-post-image"
-              />
-            )}
-            <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
-            <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
-          </div>
+          <Link className="p-4 blog-post-card cursor-pointer" key={post.id} href={`/blogs/${post.id}`} passHref>
+            <div >
+              {post.img && (
+                <img
+                  src={post.img}
+                  alt={post.title}
+                  className="rounded-lg mb-2 blog-post-image"
+                />
+              )}
+              <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
+              <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
+            </div>
+          </Link>
         ))}
       </Slider>
     </div>

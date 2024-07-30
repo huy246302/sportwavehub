@@ -1,8 +1,9 @@
 import { GeistSans } from "geist/font/sans";
 import ConditionalLayout from "../components/ConditionalLayout";
+import ScrollToTopButton from "../components/ScrollToTopButton";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/react"
+import { Analytics } from "@vercel/analytics/react";
 import '@/styles/globals.css';
 
 const defaultUrl = process.env.VERCEL_URL
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: LayoutProps) {
         <SpeedInsights/>
         <Analytics/>
         <ConditionalLayout>{children}</ConditionalLayout>
+        <ScrollToTopButton /> {/* Include the Scroll to Top button */}
       </body>
     </html>
   );

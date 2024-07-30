@@ -1,4 +1,3 @@
-// pages/blogs/index.tsx
 'use client';
 
 import { useEffect, useState } from 'react';
@@ -19,6 +18,10 @@ interface BlogPost {
 const Blogs = () => {
   const [featuredPost, setFeaturedPost] = useState<BlogPost | null>(null);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
+  const [visiblePosts, setVisiblePosts] = useState<BlogPost[]>([]);
+  const [showMore, setShowMore] = useState(true);
+  const initialCount = 9; // Number of posts to show initially
+  const incrementCount = 3; // Number of posts to show when "Show More" is clicked
 
   useEffect(() => {
     async function fetchBlogPosts() {
@@ -32,8 +35,10 @@ const Blogs = () => {
         }
 
         if (data && data.length > 0) {
-          setFeaturedPost(data[0]);
-          setBlogPosts(data.slice(1));
+          setFeaturedPost(data[0]); // Set the featured post
+          const posts = data.slice(1); // Exclude the featured post
+          setBlogPosts(posts);
+          setVisiblePosts(posts.slice(0, initialCount)); // Show initial posts
         }
       } catch (error) {
         console.error('Error fetching blog posts:', (error as Error).message);
@@ -42,6 +47,14 @@ const Blogs = () => {
 
     fetchBlogPosts();
   }, []);
+
+  const handleShowMore = () => {
+    const nextVisiblePosts = blogPosts.slice(0, visiblePosts.length + incrementCount);
+    setVisiblePosts(nextVisiblePosts);
+    if (nextVisiblePosts.length >= blogPosts.length) {
+      setShowMore(false); // Hide "Show More" button if all posts are shown
+    }
+  };
 
   return (
     <div className="container mx-auto mt-8 px-4">
@@ -59,7 +72,7 @@ const Blogs = () => {
       )}
       <h1 className="text-4xl font-bold mb-8 text-center">All Blog Posts</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {blogPosts.map((post) => (
+        {visiblePosts.map((post) => (
           <div key={post.id} className="bg-white rounded-lg shadow-md p-4 transition-transform transform hover:-translate-y-1 hover:shadow-lg">
             {post.img && <img src={post.img} alt={post.title} className="rounded-lg mb-4 w-full h-60 object-cover" style={{ aspectRatio: '1 / 1' }} />}
             <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
@@ -70,6 +83,16 @@ const Blogs = () => {
           </div>
         ))}
       </div>
+      {showMore && (
+        <div className="text-center mt-8">
+          <button 
+            onClick={handleShowMore} 
+            className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 mb-5"
+          >
+            Show More
+          </button>
+        </div>
+      )}
     </div>
   );
 };
