@@ -7,6 +7,7 @@ import { PostgrestError } from '@supabase/supabase-js';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '@/styles/globals.css';
 
 const supabase = createClient();
 
@@ -48,6 +49,10 @@ const Carousel = () => {
     slidesToShow: 3,
     slidesToScroll: 1,
     swipeToSlide: true,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    nextArrow: <div className="hidden" />, // Hidden arrow
+    prevArrow: <div className="hidden" />, // Hidden arrow
     responsive: [
       {
         breakpoint: 1024,
@@ -72,13 +77,18 @@ const Carousel = () => {
 
   return (  
     <div className="container mx-auto mt-8">
-      <h1 className="text-3xl font-semibold mb-4">Blog Posts</h1>
+      <h1 className="text-3xl font-semibold mb-4 text-center">Blog Posts</h1>
       <Slider {...carouselSettings}>
         {blogPosts.map((post) => (
-          <div key={post.id} className="blog-post-card">
-            <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-            <p className="text-gray-700 mb-2">{post.content}</p>
-            {post.img && <img src={post.img} alt={post.title} className="rounded-lg mb-2 blog-post-image" />}
+          <div key={post.id} className="p-4 blog-post-card">
+            {post.img && (
+              <img
+                src={post.img}
+                alt={post.title}
+                className="rounded-lg mb-2 blog-post-image"
+              />
+            )}
+            <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
             <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
           </div>
         ))}
