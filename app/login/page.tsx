@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { signIn, signUp } from '../../actions/actions';
 import { SubmitButton } from './submit-button';
+import '@/styles/globals.css';
 
 const LoginContent: React.FC = () => {
   const searchParams = useSearchParams();

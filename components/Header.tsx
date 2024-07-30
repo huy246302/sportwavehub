@@ -1,9 +1,11 @@
-'use client';
-
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 
-const Header = () => {
+interface HeaderProps {
+  isHomePage: boolean;
+}
+
+const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLLIElement>(null);
 
@@ -14,11 +16,11 @@ const Header = () => {
       }
     };
 
-    const handleEscKey = (event: KeyboardEvent) => {
+    function handleEscKey(event: KeyboardEvent) {
       if (event.key === 'Escape') {
         setDropdownOpen(false);
       }
-    };
+    }
 
     const handleInactivity = () => {
       setDropdownOpen(false);
@@ -46,7 +48,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-white text-black shadow-md py-5 w-full z-30">
+    <header className={`bg-white text-black shadow-md py-5 w-full z-40 ${isHomePage ? 'sticky top-0' : ''}`}>
       <div className="container mx-auto flex justify-between items-center px-4">
         <h1 className="text-2xl font-bold">
           <Link href="/">Sports News</Link>

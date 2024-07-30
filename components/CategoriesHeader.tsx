@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, forwardRef } from 'react';
 import { createClient } from '../utils/supabase/client';
 import { PostgrestError } from '@supabase/supabase-js';
 import Link from 'next/link';
@@ -10,7 +10,7 @@ interface Category {
   name: string;
 }
 
-const CategoriesHeader = () => {
+const CategoriesHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [categories, setCategories] = useState<Category[]>([]);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ const CategoriesHeader = () => {
   }, []);
 
   return (
-    <header className="bg-gray-100 py-4 shadow-md fixed top-16 w-full z-20">
+    <header ref={ref} className="bg-gray-100 py-4 shadow-md">
       <div className="container mx-auto px-4 flex justify-center space-x-4">
         {categories.map((category) => (
           <Link className="text-lg font-medium text-gray-700 hover:text-blue-500" key={category.id} href={`/categories/${category.id}`}>
@@ -43,6 +43,8 @@ const CategoriesHeader = () => {
       </div>
     </header>
   );
-};
+});
+
+CategoriesHeader.displayName = 'CategoriesHeader';
 
 export default CategoriesHeader;

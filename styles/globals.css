@@ -3,54 +3,76 @@
 @tailwind utilities;
 
 /* globals.css */
-html, body {
+body {
   margin: 0;
   padding: 0;
-  font-family: 'Geist Sans', sans-serif;
+  box-sizing: border-box;
 }
 
 .bg-background {
-  background-color: #f0f4f8; /* Example background color */
+  background-color: #f9f9f9; /* or your background color */
 }
 
 .text-foreground {
-  color: #333; /* Example text color */
+  color: #333; /* or your text color */
 }
 
-.bg-login-background {
-  background-color: #e0f7fa; /* Example login background color */
+.mt-16 {
+  margin-top: 4rem; /* 64px */
 }
 
-.text-login-foreground {
-  color: #00796b; /* Example login text color */
+.mt-28 {
+  margin-top: 7rem; /* 112px */
 }
 
-/* Header styling */
-header {
-  height: 60px; /* Example height */
+.min-h-screen {
+  min-height: 100vh;
 }
 
-header.fixed {
+.flex-1 {
+  flex: 1;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.sticky {
+  position: sticky;
+}
+
+.top-16 {
+  top: 4rem; /* Adjust based on your Header height */
+}
+
+.z-30 {
+  z-index: 30;
+}
+
+.z-40 {
+  z-index: 40;
+}
+
+.sticky {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 30;
+  background-color: #f3f4f6; /* Ensure background color matches */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Ensure shadow matches */
 }
-
-header.categories-header {
-  position: fixed;
-  top: 60px; /* Adjust based on main header height */
-  width: 100%;
-  z-index: 20;
-}
-
-.main-content {
-  margin-top: 60px; /* Ensure content starts below the header */
-}
-
-.dropdown-menu {
-  z-index: 50;
-}
-
 
 .blog-post-card {
     background-color: white;
