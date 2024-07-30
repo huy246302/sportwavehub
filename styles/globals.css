@@ -25,13 +25,22 @@ html, body {
   color: #00796b; /* Example login text color */
 }
 
-/* Ensure header and categories header do not overlap */
+/* Header styling */
 header {
-  height: 60px; /* Adjust based on header height */
+  height: 60px; /* Example height */
 }
 
-.categories-header {
-  margin-top: 60px; /* Match header height or adjust if needed */
+header.fixed {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+header.categories-header {
+  position: fixed;
+  top: 60px; /* Adjust based on main header height */
+  width: 100%;
+  z-index: 20;
 }
 
 .main-content {

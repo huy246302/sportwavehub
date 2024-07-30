@@ -3,6 +3,7 @@ import ConditionalLayout from "../components/ConditionalLayout";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/react"
+import '@/styles/globals.css';
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`

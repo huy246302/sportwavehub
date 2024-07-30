@@ -13,24 +13,21 @@ interface ConditionalLayoutProps {
 const ConditionalLayout: React.FC<ConditionalLayoutProps> = ({ children }) => {
   const pathname = usePathname();
 
-  const showCategoriesHeader = pathname === '/blogs' || pathname.startsWith('/blogs/');
+  const isBlogsPage = pathname.startsWith('/blogs');
 
   return (
     <div className="bg-background text-foreground min-h-screen flex flex-col">
       {/* Main Header */}
       <Header />
-      
-      {/* Conditionally render CategoriesHeader */}
-      {showCategoriesHeader && (
-        <div className="relative">
-          <CategoriesHeader />
-        </div>
-      )}
-      
-      <main className={`flex-1 ${showCategoriesHeader ? 'pt-20' : ''}`}> {/* Add padding if CategoriesHeader is shown */}
+
+      {/* CategoriesHeader conditionally rendered */}
+      {isBlogsPage && <CategoriesHeader />}
+
+      {/* Main content area with appropriate top margin */}
+      <main className={`${isBlogsPage ? 'mt-28' : 'mt-16'} flex-1`}>
         {children}
       </main>
-      
+
       <Footer />
     </div>
   );

@@ -1,11 +1,14 @@
-"use client";
+// src/app/login/page.tsx
 
-import Link from "next/link";
-import { useSearchParams } from "next/navigation";
-import { signIn, signUp } from "../../actions/actions";
-import { SubmitButton } from "./submit-button";
+'use client';
 
-export default function Login() {
+import React, { Suspense } from 'react';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
+import { signIn, signUp } from '../../actions/actions';
+import { SubmitButton } from './submit-button';
+
+const LoginContent: React.FC = () => {
   const searchParams = useSearchParams();
   const message = searchParams.get("message");
 
@@ -74,4 +77,14 @@ export default function Login() {
       </form>
     </div>
   );
-}
+};
+
+const Login: React.FC = () => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <LoginContent />
+    </Suspense>
+  );
+};
+
+export default Login;

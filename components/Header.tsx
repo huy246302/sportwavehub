@@ -14,11 +14,11 @@ const Header = () => {
       }
     };
 
-    function handleEscKey(event: KeyboardEvent) {
+    const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setDropdownOpen(false);
       }
-    }
+    };
 
     const handleInactivity = () => {
       setDropdownOpen(false);
@@ -46,7 +46,7 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="bg-white text-black shadow-md py-5 w-full z-40"> {/* Removed fixed position */}
+    <header className="bg-white text-black shadow-md py-5 w-full z-30">
       <div className="container mx-auto flex justify-between items-center px-4">
         <h1 className="text-2xl font-bold">
           <Link href="/">Sports News</Link>

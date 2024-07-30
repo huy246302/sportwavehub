@@ -33,7 +33,7 @@ const CategoriesHeader = () => {
   }, []);
 
   return (
-    <header className="bg-gray-100 py-4 shadow-md fixed top-16 w-full z-30"> {/* Fixed position with top offset */}
+    <header className="bg-gray-100 py-4 shadow-md fixed top-16 w-full z-20">
       <div className="container mx-auto px-4 flex justify-center space-x-4">
         {categories.map((category) => (
           <Link className="text-lg font-medium text-gray-700 hover:text-blue-500" key={category.id} href={`/categories/${category.id}`}>
