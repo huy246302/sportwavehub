@@ -4,7 +4,6 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '../../utils/supabase/client';
 import { PostgrestError } from '@supabase/supabase-js';
-import '../../styles/globals.css';
 import Link from 'next/link';
 
 const supabase = createClient();
@@ -40,16 +39,16 @@ const Blogs = () => {
   }, []);
 
   return (
-    <div className="container mx-auto mt-8">
-      <h1 className="text-3xl font-semibold mb-4">All Blog Posts</h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="container mx-auto mt-8 px-4">
+      <h1 className="text-4xl font-bold mb-8 text-center">All Blog Posts</h1>
+      <div className="space-y-8">
         {blogPosts.map((post) => (
-          <div key={post.id} className="bg-white rounded-lg shadow-md p-6 mb-6">
-            <h2 className="text-xl font-semibold mb-2">{post.title}</h2>
-            <p className="text-gray-700 mb-4">{post.content}</p>
-            {post.img && <img src={post.img} alt={post.title} className="rounded-lg mb-4" />}
-            <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
-            <Link href={`/blogs/${post.id}`} className="text-blue-500 hover:underline">
+          <div key={post.id} className="bg-white rounded-lg shadow-md p-6 transition-transform transform hover:-translate-y-1 hover:shadow-lg">
+            {post.img && <img src={post.img} alt={post.title} className="rounded-lg mb-4 max-h-60 w-full object-cover" />}
+            <h2 className="text-2xl font-semibold mb-2">{post.title}</h2>
+            <p className="text-gray-700 mb-4">{post.content.substring(0, 150)}...</p>
+            <p className="text-sm text-gray-500 mb-4">{new Date(post.created_at).toLocaleDateString()}</p>
+            <Link href={`/blogs/${post.id}`} className="text-blue-600 font-medium hover:underline">
               Read More
             </Link>
           </div>

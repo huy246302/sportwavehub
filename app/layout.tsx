@@ -1,5 +1,4 @@
 import { GeistSans } from "geist/font/sans";
-import "../styles/globals.css";
 import ConditionalLayout from "../components/ConditionalLayout";
 import React from "react";
 import { SpeedInsights } from "@vercel/speed-insights/next";

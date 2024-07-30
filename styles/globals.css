@@ -2,6 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+/* globals.css */
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Geist Sans', sans-serif;
+}
+
+.bg-background {
+  background-color: #f0f4f8; /* Example background color */
+}
+
+.text-foreground {
+  color: #333; /* Example text color */
+}
+
+.bg-login-background {
+  background-color: #e0f7fa; /* Example login background color */
+}
+
+.text-login-foreground {
+  color: #00796b; /* Example login text color */
+}
+
+/* Ensure header and categories header do not overlap */
+header {
+  height: 60px; /* Adjust based on header height */
+}
+
+.categories-header {
+  margin-top: 60px; /* Match header height or adjust if needed */
+}
+
+.main-content {
+  margin-top: 60px; /* Ensure content starts below the header */
+}
+
+.dropdown-menu {
+  z-index: 50;
+}
+
+
 .blog-post-card {
     background-color: white;
     border-radius: 10px;

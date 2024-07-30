@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
+import CategoriesHeader from './CategoriesHeader';
 
 interface ConditionalLayoutProps {
   children: React.ReactNode;
@@ -12,20 +13,24 @@ interface ConditionalLayoutProps {
 const ConditionalLayout: React.FC<ConditionalLayoutProps> = ({ children }) => {
   const pathname = usePathname();
 
-  if (pathname === '/login') {
-    return (
-      <div className="bg-login-background text-login-foreground min-h-screen flex flex-col items-center justify-center">
-        {children}
-      </div>
-    );
-  }
+  const showCategoriesHeader = pathname === '/blogs' || pathname.startsWith('/blogs/');
 
   return (
-    <div className="bg-background text-foreground">
+    <div className="bg-background text-foreground min-h-screen flex flex-col">
+      {/* Main Header */}
       <Header />
-      <main className="min-h-screen flex flex-col items-center">
+      
+      {/* Conditionally render CategoriesHeader */}
+      {showCategoriesHeader && (
+        <div className="relative">
+          <CategoriesHeader />
+        </div>
+      )}
+      
+      <main className={`flex-1 ${showCategoriesHeader ? 'pt-20' : ''}`}> {/* Add padding if CategoriesHeader is shown */}
         {children}
       </main>
+      
       <Footer />
     </div>
   );
