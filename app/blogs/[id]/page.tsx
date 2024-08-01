@@ -51,7 +51,7 @@ const BlogPost = () => {
           </div>
           <p className="text-sm text-gray-500">{new Date(blogPost.created_at).toLocaleDateString()}</p>
         </div>
-        {blogPost.img && <img src={blogPost.img} alt={blogPost.title} className="rounded-lg mb-4" />}
+        {blogPost.img && <img src={blogPost.img} alt={blogPost.title} className="rounded-lg mb-4 mx-auto" style={{ display: 'block' }} />}
         <div
           className="text-gray-700 mb-4"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(blogPost.content) }}
