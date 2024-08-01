@@ -12,11 +12,17 @@ export interface Author {
     content: string;
     img?: string;
     created_at: string;
-    author_id: Author;
-    category_id: Category;
-    subcategory_id: SubCategory;
-    // tags: Tag[];
+    authors?: {
+      name: string;
+    };
+    categories?: {
+      name: string;
+    };
+    sub_categories?: {
+      name: string;
+    };
   }
+  
   
   export interface Category {
     id: string;
