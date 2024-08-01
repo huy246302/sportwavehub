@@ -4,24 +4,17 @@ import { useEffect, useState } from 'react';
 import { createClient } from '../../utils/supabase/client';
 import { PostgrestError } from '@supabase/supabase-js';
 import Link from 'next/link';
+import type { BlogPost } from '@/interfaces/blog'; // Type-only import
 
 const supabase = createClient();
-
-interface BlogPost {
-  id: string;
-  title: string;
-  content: string;
-  img?: string;
-  created_at: string;
-}
 
 const Blogs = () => {
   const [featuredPost, setFeaturedPost] = useState<BlogPost | null>(null);
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
   const [visiblePosts, setVisiblePosts] = useState<BlogPost[]>([]);
   const [showMore, setShowMore] = useState(true);
-  const initialCount = 9; // Number of posts to show initially
-  const incrementCount = 3; // Number of posts to show when "Show More" is clicked
+  const initialCount = 9;
+  const incrementCount = 3;
 
   useEffect(() => {
     async function fetchBlogPosts() {
@@ -35,10 +28,10 @@ const Blogs = () => {
         }
 
         if (data && data.length > 0) {
-          setFeaturedPost(data[0]); // Set the featured post
-          const posts = data.slice(1); // Exclude the featured post
+          setFeaturedPost(data[0]);
+          const posts = data.slice(1);
           setBlogPosts(posts);
-          setVisiblePosts(posts.slice(0, initialCount)); // Show initial posts
+          setVisiblePosts(posts.slice(0, initialCount));
         }
       } catch (error) {
         console.error('Error fetching blog posts:', (error as Error).message);
@@ -52,7 +45,7 @@ const Blogs = () => {
     const nextVisiblePosts = blogPosts.slice(0, visiblePosts.length + incrementCount);
     setVisiblePosts(nextVisiblePosts);
     if (nextVisiblePosts.length >= blogPosts.length) {
-      setShowMore(false); // Hide "Show More" button if all posts are shown
+      setShowMore(false);
     }
   };
 

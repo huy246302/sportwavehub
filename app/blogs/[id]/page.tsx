@@ -4,16 +4,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { createClient } from '../../../utils/supabase/client';
 import { PostgrestError } from '@supabase/supabase-js';
+import type { BlogPost } from '@/interfaces/blog';  // Adjust the import path as necessary
 
 const supabase = createClient();
-
-interface BlogPost {
-  id: string;
-  title: string;
-  content: string;
-  img?: string;
-  created_at: string;
-}
 
 const BlogPost = () => {
   const { id } = useParams();

@@ -2,13 +2,9 @@ import { useEffect, useState, forwardRef } from 'react';
 import { createClient } from '../utils/supabase/client';
 import { PostgrestError } from '@supabase/supabase-js';
 import Link from 'next/link';
+import type { Category } from '@/interfaces/blog'; // Type-only import
 
 const supabase = createClient();
-
-interface Category {
-  id: string;
-  name: string;
-}
 
 const CategoriesHeader = forwardRef<HTMLDivElement>((_, ref) => {
   const [categories, setCategories] = useState<Category[]>([]);

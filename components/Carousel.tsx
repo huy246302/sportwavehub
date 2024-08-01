@@ -9,16 +9,9 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import '@/styles/globals.css';
 import Link from 'next/link';
+import type { BlogPost } from '@/interfaces/blog'; // Type-only import
 
 const supabase = createClient();
-
-interface BlogPost {
-  id: string;
-  title: string;
-  content: string;
-  img?: string;
-  created_at: string;
-}
 
 const Carousel = () => {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([]);
@@ -52,8 +45,8 @@ const Carousel = () => {
     swipeToSlide: true,
     autoplay: true,
     autoplaySpeed: 3000,
-    nextArrow: <div className="hidden" />, // Hidden arrow
-    prevArrow: <div className="hidden" />, // Hidden arrow
+    nextArrow: <div className="hidden" />,
+    prevArrow: <div className="hidden" />,
     responsive: [
       {
         breakpoint: 1024,
