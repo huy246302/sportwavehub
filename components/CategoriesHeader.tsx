@@ -32,7 +32,7 @@ const CategoriesHeader = forwardRef<HTMLDivElement>((_, ref) => {
     <header ref={ref} className="bg-gray-100 py-4 shadow-md">
       <div className="container mx-auto px-4 flex justify-center space-x-4">
         {categories.map((category) => (
-          <Link className="text-lg font-medium text-gray-700 hover:text-blue-500" key={category.id} href={`/categories/${category.id}`}>
+          <Link className="text-lg font-medium text-gray-700 hover:text-blue-500" key={category.category_id} href={`/categories/${category.category_id}`}>
             {category.name}
           </Link>
         ))}

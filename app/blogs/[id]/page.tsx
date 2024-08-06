@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { createClient } from '../../../utils/supabase/client';
+import { createClient } from '../../../utils/supabase/client'; // Adjust the import path as necessary
 import { PostgrestError } from '@supabase/supabase-js';
 import DOMPurify from 'dompurify';
 import type { BlogPost } from '@/interfaces/blog';  // Adjust the import path as necessary
@@ -10,33 +10,46 @@ import type { BlogPost } from '@/interfaces/blog';  // Adjust the import path as
 const supabase = createClient();
 
 const BlogPost = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Get the blog ID from the URL
   const [blogPost, setBlogPost] = useState<BlogPost | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchBlogPost() {
-      if (!id) return;
+      if (!id) return; // Ensure ID is present
 
       try {
         const { data, error } = await supabase
           .from('blog_posts')
-          .select('*, authors(name), categories(name), sub_categories(name)')
-          .eq('id', id)
-          .single();
+          .select(`
+            *,
+            authors (name),
+            categories (name),
+            sub_categories!blog_posts_sub_category_id_fkey(name) // Specify the exact relationship name here
+          `)
+          .eq('blog_id', id) // Use 'blog_id' for filtering
+          .single(); // Fetch a single record
+
         if (error) {
           throw error as PostgrestError;
         }
-        setBlogPost(data);
+
+        setBlogPost(data as unknown as BlogPost); // Set the fetched data to state
       } catch (error) {
-        console.error('Error fetching blog post:', (error as Error).message);
+        console.error('Error fetching blog post:', (error as PostgrestError).message);
+        setError('Failed to load blog post. Please try again later.'); // Set error message
       }
     }
 
     fetchBlogPost();
   }, [id]);
 
+  if (error) {
+    return <div className="text-center mt-8">{error}</div>; // Display error message
+  }
+
   if (!blogPost) {
-    return <div>Loading...</div>;
+    return <div className="text-center mt-8">Loading...</div>; // Display loading state
   }
 
   return (

@@ -74,7 +74,7 @@ const Carousel = () => {
       <h1 className="text-3xl font-semibold mb-4 text-center">Blog Posts</h1>
       <Slider {...carouselSettings}>
         {blogPosts.map((post) => (
-          <Link className="p-4 blog-post-card cursor-pointer" key={post.id} href={`/blogs/${post.id}`} passHref>
+          <Link className="p-4 blog-post-card cursor-pointer" key={post.blog_id} href={`/blogs/${post.blog_id}`} passHref>
             <div >
               {post.img && (
                 <img

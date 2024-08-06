@@ -22,8 +22,23 @@ const Blogs = () => {
       try {
         const { data, error } = await supabase
           .from('blog_posts')
-          .select('*')
+          .select(`
+            *,
+            authors (
+              name
+            ),
+            categories (
+              name
+            ),
+            sub_categories!blog_posts_sub_category_id_fkey (
+              name
+            ),
+            tags (
+              name
+            )
+          `)
           .order('created_at', { ascending: false });
+
         if (error) {
           throw error as PostgrestError;
         }
@@ -54,25 +69,29 @@ const Blogs = () => {
     <div className="container mx-auto mt-8 px-4">
       <h1 className="text-4xl font-bold mb-8 text-center">Newest Blog</h1>
       {featuredPost && (
-        <Link href={`/blogs/${featuredPost.id}`}>
+        <Link href={`/blogs/${featuredPost.blog_id}`}>
           <div className="bg-yellow-100 border border-yellow-300 rounded-lg shadow-md p-6 mb-8 transition-transform transform hover:-translate-y-1 hover:shadow-lg cursor-pointer">
             {featuredPost.img && <img src={featuredPost.img} alt={featuredPost.title} className="rounded-lg mb-4 w-full h-60 object-cover" />}
             <h2 className="text-3xl font-semibold mb-2 truncate">{featuredPost.title}</h2>
             <p className="text-gray-700 mb-4 truncate" dangerouslySetInnerHTML={{ __html: featuredPost.content.substring(0, 300) + '...' }}></p>
             <p className="text-sm text-gray-500">{new Date(featuredPost.created_at).toLocaleDateString()}</p>
+            {featuredPost.categories && <p className="text-sm text-gray-500">Category: {featuredPost.categories.name}</p>}
+            {featuredPost.sub_categories && <p className="text-sm text-gray-500">Subcategory: {featuredPost.sub_categories.name}</p>}
           </div>
         </Link>
       )}
       <h1 className="text-4xl font-bold mb-8 text-center">All Blog Posts</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {visiblePosts.map((post) => (
-          <Link href={`/blogs/${post.id}`} key={post.id}>
+          <Link href={`/blogs/${post.blog_id}`} key={post.blog_id}>
             <div className="bg-white rounded-lg shadow-md p-4 flex flex-col justify-between transition-transform transform hover:-translate-y-1 hover:shadow-lg cursor-pointer max-h-[600px]">
               {post.img && <img src={post.img} alt={post.title} className="rounded-lg mb-4 w-full h-60 object-cover" style={{ aspectRatio: '1 / 1' }} />}
               <div className="flex-1 flex flex-col">
                 <h2 className="text-xl font-semibold mb-2 overflow-hidden" style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }}>{post.title}</h2>
                 <p className="text-sm text-gray-500 mb-4">{new Date(post.created_at).toLocaleDateString()}</p>
                 <p className="text-gray-700 flex-1 overflow-hidden" style={{ display: '-webkit-box', WebkitBoxOrient: 'vertical', WebkitLineClamp: 2 }} dangerouslySetInnerHTML={{ __html: post.content.substring(0, 300) + '...' }}></p>
+                {post.categories && <p className="text-sm text-gray-500">Category: {post.categories.name}</p>}
+                {post.sub_categories && <p className="text-sm text-gray-500">Subcategory: {post.sub_categories.name}</p>}
               </div>
             </div>
           </Link>
