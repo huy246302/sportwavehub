@@ -132,5 +132,11 @@ body {
   opacity: 1;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
-/* Remove any arrow-related CSS */
+.img-custom {
+  width: 100px;
+  height: auto; /* Keeps the aspect ratio intact */
+}

@@ -36,6 +36,59 @@ const Carousel = () => {
   }, []);
 
   // Configuration for the carousel
+  const CustomPrevArrow = (props: any) => {
+    const { className, onClick } = props;
+    return (
+      <div
+        className={`${className} custom-prev-arrow`}
+        onClick={onClick}
+        style={{ ...props.style, display: "block", left: "-25px" }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-black"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </div>
+    );
+  };
+  
+  const CustomNextArrow = (props: any) => {
+    const { className, onClick } = props;
+    return (
+      <div
+        className={`${className} custom-next-arrow`}
+        onClick={onClick}
+        style={{ ...props.style, display: "block", right: "-25px" }}
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 text-black"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+          strokeWidth={2}
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </div>
+    );
+  };
+  
+
   const carouselSettings = {
     dots: true,
     infinite: true,
@@ -45,8 +98,8 @@ const Carousel = () => {
     swipeToSlide: true,
     autoplay: true,
     autoplaySpeed: 3000,
-    nextArrow: <div className="hidden" />,
-    prevArrow: <div className="hidden" />,
+    nextArrow: <CustomNextArrow />,
+    prevArrow: <CustomPrevArrow />,
     responsive: [
       {
         breakpoint: 1024,
@@ -68,6 +121,7 @@ const Carousel = () => {
       },
     ],
   };
+  
 
   return (  
     <div className="container mx-auto mt-8">
