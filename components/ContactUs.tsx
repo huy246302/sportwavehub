@@ -1,11 +1,11 @@
 import Image from 'next/image';
-import styles from '../styles/ContactUs.module.css'; // Importing CSS Module for styling
+import '../styles/globals.css'; // Import the global CSS
 
 const ContactUs = () => {
     return (
-        <div className={styles.container}>
+        <div id="contactUsContainer">
           {/* Left Section */}
-          <div className={styles.leftSection}>
+          <div id="contactUsLeftSection">
             <Image 
               src="https://cdn.rareblocks.xyz/collection/clarity/images/cta/3/crowny-logo.svg" 
               alt="Brand Logo" 
@@ -13,10 +13,10 @@ const ContactUs = () => {
               height={100}
               sizes="100vw" 
             />
-            <p className={styles.testimonial}>
+            <p id="contactUsTestimonial">
               “This platform is a game-changer! Our sports news is now faster and more engaging.”
             </p>
-            <div className={styles.profile}>
+            <div id="contactUsProfile">
               <Image 
                 src="https://cdn.rareblocks.xyz/collection/clarity/images/cta/3/avatar-female.png" 
                 alt="Profile"             
@@ -24,7 +24,7 @@ const ContactUs = () => {
                 height={50}
                 sizes="100vw" 
               />
-              <div className={styles.profileInfo}>
+              <div id="contactUsProfileInfo">
                 <p>Jane Smith</p>
                 <p>Chief Editor, SportsDaily</p>
               </div>
@@ -34,23 +34,23 @@ const ContactUs = () => {
                 width={100}
                 height={30}
                 sizes="100vw" 
-                className={styles.signature}
+                id="contactUsSignature"
               />
             </div>
           </div>
     
           {/* Right Section */}
-          <div className={styles.rightSection}>
+          <div id="contactUsRightSection">
             <h1>Stay Updated with the Latest Sports News 🏅</h1>
             <p>Get the latest sports news delivered directly to your inbox. Sign up now and never miss an update!</p>
-            <div className={styles.subscriptionForm}>
+            <div id="contactUsSubscriptionForm">
               <input 
                 type="email" 
                 placeholder="Enter your email address" 
-                className={styles.emailInput} 
+                id="contactUsEmailInput"
               />
               <button 
-                className={styles.subscribeButton}
+                id="contactUsSubscribeButton"
               >
                 Subscribe Now
               </button>

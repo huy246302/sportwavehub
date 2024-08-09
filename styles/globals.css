@@ -1,8 +1,9 @@
+/* Import Tailwind CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* globals.css */
+/* Global Styles */
 body {
   margin: 0;
   padding: 0;
@@ -74,37 +75,78 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Ensure shadow matches */
 }
 
-.blog-post-card {
-  background-color: white;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 0 10px; /* Adjust margin for spacing between cards */
+/* Contact Us Page Styles */
+/* Contact Us Page Styles */
+#contactUsContainer {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 30px; /* Increase gap between columns */
+  background-color: #f5f5f5;
+  border-radius: 20px;
+  color: #333;
+  padding: 40px; /* Increase padding around the container */
+}
+
+#contactUsLeftSection {
+  background-color: #ffffff;
+  padding: 40px; /* Increase padding inside the left section */
+  border-radius: 20px;
+  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 20px; /* Adjust as needed */
+  transform: rotate(-5deg);
+  z-index: 1;
+}
+
+#contactUsRightSection {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: calc(100% / 3 - 20px); /* Ensure each card takes up 1/3 of the container width, adjusting for margin */
-  box-sizing: border-box;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.blog-post-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-}
-
-.blog-post-image {
-  height: 250px;
-  width: 100%;
-  object-fit: cover;
-  border-radius: 10px;
-}
-
-.slick-slide > div {
-  display: flex;
   justify-content: center;
+  padding: 40px; /* Increase padding inside the right section */
 }
 
+
+#contactUsTestimonial {
+  font-style: italic;
+  margin: 20px 0;
+}
+
+#contactUsProfile {
+  display: flex;
+  align-items: center;
+}
+
+#contactUsProfileInfo {
+  margin-left: 10px;
+}
+
+#contactUsSignature {
+  position: relative;
+  left: -20px;
+}
+
+#contactUsSubscriptionForm {
+  display: flex;
+  margin-top: 20px;
+}
+
+#contactUsEmailInput {
+  flex: 1;
+  padding: 15px;
+  border-radius: 50px 0 0 50px;
+  border: none;
+}
+
+#contactUsSubscribeButton {
+  padding: 15px 30px;
+  background: linear-gradient(90deg, #ff4500, #ff6347);
+  border-radius: 0 50px 50px 0;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Scroll to Top Button */
 .scroll-to-top {
   position: fixed;
   bottom: 2rem;
