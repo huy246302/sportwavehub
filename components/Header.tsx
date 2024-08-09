@@ -3,9 +3,10 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import { createClient } from '@/utils/supabase/client';
-import { User } from '@supabase/supabase-js'; // Import User type
-import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa'; // Import icons from react-icons
-import { useRouter } from 'next/navigation'; // Import useRouter
+import { User } from '@supabase/supabase-js';
+import { FaUserCircle, FaSignOutAlt } from 'react-icons/fa';
+import { useRouter } from 'next/navigation';
+import useInactivityTimeout from '@/hooks/useInactivityTimeout';
 
 interface HeaderProps {
   isHomePage: boolean;
@@ -13,9 +14,13 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [user, setUser] = useState<User | null>(null); // Set the correct type here
+  const [user, setUser] = useState<User | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false); // State for mobile menu
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const router = useRouter(); // Initialize useRouter
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
+
+  useInactivityTimeout(() => setDropdownOpen(false), 30000);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -24,11 +29,11 @@ const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
       }
     };
 
-    function handleEscKey(event: KeyboardEvent) {
+    const handleEscKey = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         setDropdownOpen(false);
       }
-    }
+    };
 
     const handleInactivity = () => {
       setDropdownOpen(false);
@@ -57,11 +62,13 @@ const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
 
   useEffect(() => {
     const fetchUser = async () => {
+      setLoading(true);
       const supabase = createClient();
       const { data: { user } } = await supabase.auth.getUser();
-      setUser(user); // user will now be correctly set
+      setUser(user);
+      setLoading(false);
     };
-
+  
     fetchUser();
   }, []);
 
@@ -90,32 +97,45 @@ const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
 
   return (
     <header className={`bg-white text-black shadow-md py-5 w-full z-40 ${isHomePage ? 'sticky top-0' : ''}`}>
-      <div className="container mx-auto flex justify-between items-center px-4">
+      <div className="container mx-auto flex justify-between items-center px-4 flex-wrap">
         <div className="flex items-center space-x-4">
           <h1 className="text-2xl font-bold">
             <Link href="/">SportsWaveHub</Link>
           </h1>
-          <nav className="flex space-x-4">
-            <button onClick={() => handleScrollToSection('about-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300">
-              About Us
-            </button>
-            <button onClick={() => handleScrollToSection('subscription-pricing')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300">
-              Pricing
-            </button>
-            <button onClick={() => handleScrollToSection('features')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300">
-              Features
-            </button>
-            <button onClick={() => handleScrollToSection('contact-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300">
-              Contact Us
-            </button>
-            <Link href="/blogs" className="text-gray-800 hover:text-gray-600 transition-colors duration-300">
-              Blogs
-            </Link>
-          </nav>
+          {/* Hamburger Icon */}
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="sm:hidden flex items-center"
+            aria-label="Toggle menu"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
         </div>
-        {user ? (
+        <nav className={`sm:flex space-x-4 ${menuOpen ? 'block' : 'hidden'} sm:block`}>
+          <button onClick={() => handleScrollToSection('about-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+            About Us
+          </button>
+          <button onClick={() => handleScrollToSection('subscription-pricing')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+            Pricing
+          </button>
+          <button onClick={() => handleScrollToSection('features')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+            Features
+          </button>
+          <button onClick={() => handleScrollToSection('contact-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+            Contact Us
+          </button>
+          <Link href="/blogs" className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+            Blogs
+          </Link>
+        </nav>
+        {loading ? (
+          <p>Loading...</p>
+        ) : user ? (
           <div className="relative" ref={dropdownRef}>
             <button
+              aria-label="User menu"
               onClick={() => setDropdownOpen(!dropdownOpen)}
               className="bg-gray-200 text-black py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300 flex items-center"
             >

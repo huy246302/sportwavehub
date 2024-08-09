@@ -4,6 +4,7 @@ import Features from '@/components/Features';
 import Carousel from '@/components/Carousel';
 import HeroSection from '@/components/HeroSection';
 import ContactUs from '@/components/ContactUs';
+import TestimonialsSection from '@/components/TestimonialsSection';
 
 const Index = () => {
     return (
@@ -24,6 +25,10 @@ const Index = () => {
           <AboutUs />
         </section>
   
+        <section id="testimonials-selection" className="py-12 my-5">
+          <TestimonialsSection />
+        </section>
+
         <section id="features" className="py-12 my-5">
           <Features />
         </section>
