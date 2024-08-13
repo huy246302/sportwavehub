@@ -93,3 +93,18 @@ body {
 .custom-next-arrow {
   right: -40px;
 }
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 2rem; /* Adjust as needed */
+  right: 1rem; /* Adjust as needed */
+  background-color: #000; /* Or your desired color */
+  color: #fff;
+  padding: 0.5rem;
+  border-radius: 50%;
+  z-index: 1000; /* Ensure it stays above other content */
+}
+
+.scroll-to-top.hidden {
+  display: none;
+}
