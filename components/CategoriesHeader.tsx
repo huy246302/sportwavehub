@@ -35,7 +35,8 @@ const CategoriesHeader = forwardRef<HTMLDivElement>((_, ref) => {
           <Link 
             className="text-sm md:text-lg font-medium text-gray-700 hover:text-blue-500 whitespace-nowrap" 
             key={category.category_id} 
-            href={`/categories/${category.category_id}`}
+            href="#"
+            onClick={(e) => e.preventDefault()} // Prevents navigation since there's no page yet
           >
             {category.name}
           </Link>
