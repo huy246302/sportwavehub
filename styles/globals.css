@@ -75,40 +75,56 @@ body {
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Ensure shadow matches */
 }
 
-/* Contact Us Page Styles */
-/* Contact Us Page Styles */
+/* Contact Us Section Styles */
 #contactUsContainer {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: 30px; /* Increase gap between columns */
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 20px; /* Adjusted for better spacing */
   background-color: #f5f5f5;
   border-radius: 20px;
   color: #333;
-  padding: 40px; /* Increase padding around the container */
+  padding: 20px; /* Mobile-friendly padding */
+}
+
+@media (min-width: 768px) {
+  #contactUsContainer {
+    flex-direction: row; /* Side by side on larger screens */
+    padding: 40px; /* Larger padding for desktops */
+  }
 }
 
 #contactUsLeftSection {
   background-color: #ffffff;
-  padding: 40px; /* Increase padding inside the left section */
+  padding: 20px;
   border-radius: 20px;
   box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-  position: sticky;
-  top: 20px; /* Adjust as needed */
-  transform: rotate(-5deg);
-  z-index: 1;
+}
+
+@media (min-width: 768px) {
+  #contactUsLeftSection {
+    padding: 40px;
+    position: sticky;
+    top: 20px;
+    transform: rotate(-5deg); /* Rotate on larger screens only */
+  }
 }
 
 #contactUsRightSection {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 40px; /* Increase padding inside the right section */
+  padding: 20px;
 }
 
+@media (min-width: 768px) {
+  #contactUsRightSection {
+    padding: 40px;
+  }
+}
 
 #contactUsTestimonial {
   font-style: italic;
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 #contactUsProfile {
@@ -127,23 +143,44 @@ body {
 
 #contactUsSubscriptionForm {
   display: flex;
+  flex-direction: column; /* Stack input and button on mobile */
   margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+  #contactUsSubscriptionForm {
+    flex-direction: row; /* Inline on larger screens */
+  }
 }
 
 #contactUsEmailInput {
   flex: 1;
   padding: 15px;
-  border-radius: 50px 0 0 50px;
+  border-radius: 50px 50px 0 0; /* Rounded corners for mobile */
   border: none;
+  margin-bottom: 10px; /* Spacing between input and button on mobile */
+}
+
+@media (min-width: 768px) {
+  #contactUsEmailInput {
+    border-radius: 50px 0 0 50px; /* Restore rounded corners for larger screens */
+    margin-bottom: 0; /* Remove spacing on larger screens */
+  }
 }
 
 #contactUsSubscribeButton {
   padding: 15px 30px;
   background: linear-gradient(90deg, #ff4500, #ff6347);
-  border-radius: 0 50px 50px 0;
+  border-radius: 0 0 50px 50px; /* Rounded corners for mobile */
   border: none;
   color: white;
   cursor: pointer;
+}
+
+@media (min-width: 768px) {
+  #contactUsSubscribeButton {
+    border-radius: 0 50px 50px 0; /* Restore rounded corners for larger screens */
+  }
 }
 
 /* Scroll to Top Button */
