@@ -18,204 +18,78 @@ body {
   color: #333; /* or your text color */
 }
 
-.mt-16 {
-  margin-top: 4rem; /* 64px */
+/* Carousel Dots */
+.slick-dots {
+  display: flex !important; /* Ensures dots are in a flex container */
+  justify-content: center; /* Centers the dots */
+  margin: 0; /* Removes default margin */
+  padding: 0; /* Removes default padding */
+  position: absolute; /* Ensures dots are positioned at the bottom */
+  bottom: 10px; /* Adjust as needed */
+  width: 100%; /* Ensures dots container stays within carousel bounds */
 }
 
-.mt-28 {
-  margin-top: 7rem; /* 112px */
+.slick-dots li {
+  margin: 0 5px; /* Adjusts spacing between dots */
 }
 
-.min-h-screen {
-  min-height: 100vh;
+.slick-dots li button:before {
+  font-size: 10px; /* Adjusts the size of the dots */
+  color: #888; /* Default color for the dots */
 }
 
-.flex-1 {
-  flex: 1;
+.slick-dots li.slick-active button:before {
+  color: #ff4500; /* Active dot color */
 }
 
-.flex {
-  display: flex;
-}
-
-.flex-col {
-  flex-direction: column;
-}
-
-.items-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.sticky {
-  position: sticky;
-}
-
-.top-16 {
-  top: 4rem; /* Adjust based on your Header height */
-}
-
-.z-30 {
-  z-index: 30;
-}
-
-.z-40 {
-  z-index: 40;
-}
-
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 30;
-  background-color: #f3f4f6; /* Ensure background color matches */
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Ensure shadow matches */
-}
-
-/* Contact Us Section Styles */
-#contactUsContainer {
-  display: flex;
-  flex-direction: column-reverse;
-  gap: 20px; /* Adjusted for better spacing */
-  background-color: #f5f5f5;
-  border-radius: 20px;
-  color: #333;
-  padding: 20px; /* Mobile-friendly padding */
-}
-
-@media (min-width: 768px) {
-  #contactUsContainer {
-    flex-direction: row; /* Side by side on larger screens */
-    padding: 40px; /* Larger padding for desktops */
-  }
-}
-
-#contactUsLeftSection {
-  background-color: #ffffff;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
-}
-
-@media (min-width: 768px) {
-  #contactUsLeftSection {
-    padding: 40px;
-    position: sticky;
-    top: 20px;
-    transform: rotate(-5deg); /* Rotate on larger screens only */
-  }
-}
-
-#contactUsRightSection {
+/* Blog post card styling */
+.blog-post-card {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: 20px;
+  justify-content: flex-start;
+  height: 100%;
+  padding: 1rem;
 }
 
-@media (min-width: 768px) {
-  #contactUsRightSection {
-    padding: 40px;
-  }
+/* Title styling with line clamp */
+.blog-post-card h2 {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3; /* Limits title to 3 lines */
+  height: 4.5rem; /* 3 lines * 1.5rem line-height */
+  line-height: 1.5rem; /* Ensure consistent line height */
+  margin: 0 0 0.5rem 0; /* Adjust margin as needed */
 }
 
-#contactUsTestimonial {
-  font-style: italic;
-  margin: 10px 0;
+/* Ensure all descriptions have the same height */
+.description {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4; /* Adjust number of lines as needed */
+  height: 6rem; /* 4 lines * 1.5rem line-height */
+  line-height: 1.5rem;
+  margin: 0;
 }
 
-#contactUsProfile {
-  display: flex;
-  align-items: center;
-}
-
-#contactUsProfileInfo {
-  margin-left: 10px;
-}
-
-#contactUsSignature {
-  position: relative;
-  left: -20px;
-}
-
-#contactUsSubscriptionForm {
-  display: flex;
-  flex-direction: column; /* Stack input and button on mobile */
-  margin-top: 20px;
-}
-
-@media (min-width: 768px) {
-  #contactUsSubscriptionForm {
-    flex-direction: row; /* Inline on larger screens */
-  }
-}
-
-#contactUsEmailInput {
-  flex: 1;
-  padding: 15px;
-  border-radius: 50px 50px 0 0; /* Rounded corners for mobile */
-  border: none;
-  margin-bottom: 10px; /* Spacing between input and button on mobile */
-}
-
-@media (min-width: 768px) {
-  #contactUsEmailInput {
-    border-radius: 50px 0 0 50px; /* Restore rounded corners for larger screens */
-    margin-bottom: 0; /* Remove spacing on larger screens */
-  }
-}
-
-#contactUsSubscribeButton {
-  padding: 15px 30px;
-  background: linear-gradient(90deg, #ff4500, #ff6347);
-  border-radius: 0 0 50px 50px; /* Rounded corners for mobile */
-  border: none;
-  color: white;
-  cursor: pointer;
-}
-
-@media (min-width: 768px) {
-  #contactUsSubscribeButton {
-    border-radius: 0 50px 50px 0; /* Restore rounded corners for larger screens */
-  }
-}
-
-/* Scroll to Top Button */
-.scroll-to-top {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  width: 50px;
-  height: 50px;
+/* Custom Arrow Styles */
+.custom-prev-arrow,
+.custom-next-arrow {
+  position: absolute;
+  top: 50%;
+  width: 30px;
+  height: 30px;
+  background: rgba(0, 0, 0, 0.1);
   border-radius: 50%;
-  background-color: #0070f3; /* Adjust color as needed */
-  color: white;
-  border: none;
-  font-size: 24px;
-  text-align: center;
-  line-height: 50px;
-  cursor: pointer;
-  transition: opacity 0.3s ease;
-  z-index: 1000; /* Ensure it appears above other content */
+  z-index: 2;
+  transform: translateY(-50%);
 }
 
-.scroll-to-top.hidden {
-  opacity: 0;
-  pointer-events: none;
+.custom-prev-arrow {
+  left: -40px;
 }
 
-.scroll-to-top.visible {
-  opacity: 1;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-.img-custom {
-  width: 100px;
-  height: auto; /* Keeps the aspect ratio intact */
+.custom-next-arrow {
+  right: -40px;
 }

@@ -1,6 +1,5 @@
 'use client';
 
-// pages/blog_post.tsx
 import { useEffect, useState } from 'react';
 import { createClient } from '../utils/supabase/client';
 import { PostgrestError } from '@supabase/supabase-js';
@@ -22,7 +21,8 @@ const Carousel = () => {
         const { data, error } = await supabase
           .from('blog_posts')
           .select('*')
-          .order('created_at', { ascending: false });
+          .order('created_at', { ascending: false })
+          .limit(8);  // Fetch only the 8 newest posts
         if (error) {
           throw error as PostgrestError;
         }
@@ -35,18 +35,18 @@ const Carousel = () => {
     fetchBlogPosts();
   }, []);
 
-  // Configuration for the carousel
+  // Custom Arrows for Carousel Navigation
   const CustomPrevArrow = (props: any) => {
     const { className, onClick } = props;
     return (
       <div
         className={`${className} custom-prev-arrow`}
         onClick={onClick}
-        style={{ ...props.style, display: "block", left: "-25px" }}
+        style={{ ...props.style, display: "block", left: "-15px" }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-black"
+          className="h-6 w-6 text-gray-600"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -61,18 +61,18 @@ const Carousel = () => {
       </div>
     );
   };
-  
+
   const CustomNextArrow = (props: any) => {
     const { className, onClick } = props;
     return (
       <div
         className={`${className} custom-next-arrow`}
         onClick={onClick}
-        style={{ ...props.style, display: "block", right: "-25px" }}
+        style={{ ...props.style, display: "block", right: "-15px" }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          className="h-6 w-6 text-black"
+          className="h-6 w-6 text-gray-600"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -87,7 +87,6 @@ const Carousel = () => {
       </div>
     );
   };
-  
 
   const carouselSettings = {
     dots: true,
@@ -100,45 +99,52 @@ const Carousel = () => {
     autoplaySpeed: 3000,
     nextArrow: <CustomNextArrow />,
     prevArrow: <CustomPrevArrow />,
+    dotsClass: "slick-dots", // Use the default class or your custom one
     responsive: [
       {
         breakpoint: 1024,
         settings: {
           slidesToShow: 2,
           slidesToScroll: 1,
-          infinite: true,
           dots: true,
         },
       },
       {
-        breakpoint: 600,
+        breakpoint: 768,
         settings: {
           slidesToShow: 1,
           slidesToScroll: 1,
-          infinite: true,
           dots: true,
         },
       },
     ],
   };
-  
 
-  return (  
-    <div className="container mx-auto mt-8">
-      <h1 className="text-3xl font-semibold mb-4 text-center">Blog Posts</h1>
+  return (
+    <div className="container mx-auto mt-12 px-4">
+      <h1 className="text-3xl font-semibold mb-6 text-center">Blog Posts</h1>
       <Slider {...carouselSettings}>
         {blogPosts.map((post) => (
-          <Link className="p-4 blog-post-card cursor-pointer" key={post.blog_id} href={`/blogs/${post.blog_id}`} passHref>
-            <div >
+          <Link
+            className="block p-4 blog-post-card cursor-pointer"
+            key={post.blog_id}
+            href={`/blogs/${post.blog_id}`}
+            passHref
+          >
+            <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
               {post.img && (
                 <img
                   src={post.img}
                   alt={post.title}
-                  className="rounded-lg mb-2 blog-post-image"
+                  className="w-full h-48 object-cover rounded-t-lg"
                 />
               )}
-              <h2 className="text-lg font-semibold mb-1">{post.title}</h2>
-              <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
+              <div className="p-4">
+                <h2 className="text-lg font-semibold mb-2" style={{ minHeight: '4.5rem' }}>
+                  {post.title}
+                </h2>
+                <p className="text-sm text-gray-500">{new Date(post.created_at).toLocaleDateString()}</p>
+              </div>
             </div>
           </Link>
         ))}
