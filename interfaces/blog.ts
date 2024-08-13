@@ -5,15 +5,19 @@ export interface Author {
 }
 
 export interface BlogPost {
-  blog_id: string;
   title: string;
   content: string;
   created_at: string;
-  img?: string;
-  authors?: { name: string };
-  categories?: { name: string };
-  sub_categories?: { name: string };
-  tags?: { name: string };
+  img: string;
+  blog_id: string;
+  author_id: string;
+  category_id: string;
+  sub_category_id: string;
+  tag_id: string;
+  authors: Author;
+  categories: Category;
+  sub_categories: SubCategory;
+  tags: Tag;
 }
 
 

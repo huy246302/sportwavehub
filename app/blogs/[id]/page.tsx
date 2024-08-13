@@ -3,10 +3,42 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { createClient } from '../../../utils/supabase/client'; // Adjust the import path as necessary
-import { PostgrestError } from '@supabase/supabase-js';
 import DOMPurify from 'dompurify';
-import type { BlogPost } from '@/interfaces/blog';  // Adjust the import path as necessary
 
+// TypeScript interfaces for the expected data structure
+interface Author {
+  name: string;
+}
+
+interface Category {
+  name: string;
+}
+
+interface SubCategory {
+  name: string;
+}
+
+interface Tag {
+  name: string;
+}
+
+interface BlogPost {
+  title: string;
+  content: string;
+  created_at: string;
+  img: string;
+  blog_id: string;
+  author_id: string;
+  category_id: string;
+  sub_category_id: string;
+  tag_id: string;
+  authors: Author;
+  categories: Category;
+  sub_categories: SubCategory;
+  tags: Tag;
+}
+
+// Initialize the Supabase client
 const supabase = createClient();
 
 const BlogPost = () => {
@@ -25,18 +57,19 @@ const BlogPost = () => {
             *,
             authors (name),
             categories (name),
-            sub_categories!blog_posts_sub_category_id_fkey(name) // Specify the exact relationship name here
+            sub_categories!blog_posts_sub_category_id_fkey (name),
+            tags (name)
           `)
           .eq('blog_id', id) // Use 'blog_id' for filtering
           .single(); // Fetch a single record
 
         if (error) {
-          throw error as PostgrestError;
+          throw error;
         }
 
         setBlogPost(data as unknown as BlogPost); // Set the fetched data to state
       } catch (error) {
-        console.error('Error fetching blog post:', (error as PostgrestError).message);
+        console.error('Error fetching blog post:', (error as Error).message);
         setError('Failed to load blog post. Please try again later.'); // Set error message
       }
     }
@@ -61,6 +94,7 @@ const BlogPost = () => {
             {blogPost.authors && <p className="text-gray-700"><strong>Author:</strong> {blogPost.authors.name}</p>}
             {blogPost.categories && <p className="text-gray-700"><strong>Category:</strong> {blogPost.categories.name}</p>}
             {blogPost.sub_categories && <p className="text-gray-700"><strong>Subcategory:</strong> {blogPost.sub_categories.name}</p>}
+            {blogPost.tags && <p className="text-gray-700"><strong>Tag:</strong> {blogPost.tags.name}</p>}
           </div>
           <p className="text-sm text-gray-500">{new Date(blogPost.created_at).toLocaleDateString()}</p>
         </div>
