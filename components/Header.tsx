@@ -35,28 +35,12 @@ const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
       }
     };
 
-    const handleInactivity = () => {
-      setDropdownOpen(false);
-    };
-
-    let inactivityTimeout = setTimeout(handleInactivity, 30000);
-
-    const resetInactivityTimeout = () => {
-      clearTimeout(inactivityTimeout);
-      inactivityTimeout = setTimeout(handleInactivity, 30000);
-    };
-
     document.addEventListener('click', handleClickOutside);
-    document.addEventListener('mousemove', resetInactivityTimeout);
-    document.addEventListener('keypress', resetInactivityTimeout);
     document.addEventListener('keydown', handleEscKey);
 
     return () => {
       document.removeEventListener('click', handleClickOutside);
-      document.removeEventListener('mousemove', resetInactivityTimeout);
-      document.removeEventListener('keypress', resetInactivityTimeout);
       document.removeEventListener('keydown', handleEscKey);
-      clearTimeout(inactivityTimeout);
     };
   }, []);
 
@@ -96,10 +80,10 @@ const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
   }, []);
 
   return (
-    <header className={`bg-white text-black shadow-md py-5 w-full z-40 ${isHomePage ? 'sticky top-0' : ''}`}>
+    <header className={`bg-white text-black shadow-md py-3 sm:py-5 w-full z-40 ${isHomePage ? 'sticky top-0' : ''}`}>
       <div className="container mx-auto flex justify-between items-center px-4 flex-wrap">
         <div className="flex items-center space-x-4">
-          <h1 className="text-2xl font-bold">
+          <h1 className="text-xl sm:text-2xl font-bold">
             <Link href="/">SportsWaveHub</Link>
           </h1>
           {/* Hamburger Icon */}
@@ -113,36 +97,36 @@ const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
             </svg>
           </button>
         </div>
-        <nav className={`sm:flex space-x-4 ${menuOpen ? 'block' : 'hidden'} sm:block`}>
-          <button onClick={() => handleScrollToSection('about-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+        <nav className={`w-full sm:w-auto sm:flex space-y-2 sm:space-y-0 sm:space-x-4 ${menuOpen ? 'block' : 'hidden'} sm:block mt-2 sm:mt-0`}>
+          <button onClick={() => handleScrollToSection('about-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block text-base sm:text-sm">
             About Us
           </button>
-          <button onClick={() => handleScrollToSection('subscription-pricing')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+          <button onClick={() => handleScrollToSection('subscription-pricing')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block text-base sm:text-sm">
             Pricing
           </button>
-          <button onClick={() => handleScrollToSection('features')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+          <button onClick={() => handleScrollToSection('features')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block text-base sm:text-sm">
             Features
           </button>
-          <button onClick={() => handleScrollToSection('contact-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+          <button onClick={() => handleScrollToSection('contact-us')} className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block text-base sm:text-sm">
             Contact Us
           </button>
-          <Link href="/blogs" className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block">
+          <Link href="/blogs" className="text-gray-800 hover:text-gray-600 transition-colors duration-300 block sm:inline-block text-base sm:text-sm">
             Blogs
           </Link>
         </nav>
         {loading ? (
           <p>Loading...</p>
         ) : user ? (
-          <div className="relative" ref={dropdownRef}>
+          <div className="relative mt-2 sm:mt-0" ref={dropdownRef}>
             <button
               aria-label="User menu"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="bg-gray-200 text-black py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300 flex items-center"
+              className="bg-gray-200 text-black py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors duration-300 flex items-center text-base sm:text-sm"
             >
-              <FaUserCircle className="w-8 h-8" />
+              <FaUserCircle className="w-6 h-6 sm:w-8 sm:h-8" />
             </button>
             {dropdownOpen && (
-              <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg text-base sm:text-sm">
                 <li>
                   <Link href="/user" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     User Details
@@ -180,15 +164,15 @@ const Header: React.FC<HeaderProps> = ({ isHomePage }) => {
             )}
           </div>
         ) : (
-          <div className="relative">
+          <div className="relative mt-2 sm:mt-0">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300"
+              className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 text-base sm:text-sm"
             >
               Login / Register
             </button>
             {dropdownOpen && (
-              <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg">
+              <ul className="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg text-base sm:text-sm">
                 <li>
                   <Link href="/register" className="block px-4 py-2 text-gray-800 hover:bg-gray-100">
                     Register
