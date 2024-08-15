@@ -108,3 +108,21 @@ body {
 .scroll-to-top.hidden {
   display: none;
 }
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 30;
+}
+
+.fixed {
+  position: fixed;
+  width: 100%;
+  z-index: 30;
+  top: 0;
+}
+
+.top-0 {
+  top: 0;
+}

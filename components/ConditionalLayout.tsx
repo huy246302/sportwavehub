@@ -1,11 +1,11 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import CategoriesHeader from './CategoriesHeader';
-import ScrollToTopButton from './ScrollToTopButton'; // Import the ScrollToTopButton
+import ScrollToTopButton from './ScrollToTopButton';
 
 interface ConditionalLayoutProps {
   children: React.ReactNode;
@@ -13,28 +13,34 @@ interface ConditionalLayoutProps {
 
 const ConditionalLayout: React.FC<ConditionalLayoutProps> = ({ children }) => {
   const pathname = usePathname();
-
   const isBlogsPage = pathname.startsWith('/blogs');
   const isAuthPage = pathname === '/login' || pathname === '/register';
   const isHomePage = pathname === '/';
 
   const categoriesHeaderRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
+  const [headerHeight, setHeaderHeight] = useState(0);
+
+  useEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+  }, []);
 
   useEffect(() => {
     if (!isBlogsPage || !categoriesHeaderRef.current || !headerRef.current) return;
 
-    const headerHeight = headerRef.current.offsetHeight;
-
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          categoriesHeaderRef.current?.classList.remove('sticky');
+        if (entry.boundingClientRect.bottom <= 0) {
+          categoriesHeaderRef.current?.classList.add('fixed');
+          categoriesHeaderRef.current!.style.top = '0px';
         } else {
-          categoriesHeaderRef.current?.classList.add('sticky');
+          categoriesHeaderRef.current?.classList.remove('fixed');
+          categoriesHeaderRef.current!.style.top = `${headerHeight}px`;
         }
       },
-      { rootMargin: `-${headerHeight}px 0px 0px 0px` }
+      { rootMargin: `0px 0px 0px 0px` }
     );
 
     observer.observe(headerRef.current);
@@ -42,7 +48,7 @@ const ConditionalLayout: React.FC<ConditionalLayoutProps> = ({ children }) => {
     return () => {
       if (headerRef.current) observer.unobserve(headerRef.current);
     };
-  }, [isBlogsPage]);
+  }, [headerHeight, isBlogsPage]);
 
   if (isAuthPage) {
     return (
@@ -60,12 +66,16 @@ const ConditionalLayout: React.FC<ConditionalLayoutProps> = ({ children }) => {
       </div>
 
       {/* CategoriesHeader conditionally rendered */}
-      {isBlogsPage && <CategoriesHeader ref={categoriesHeaderRef} />}
+      {isBlogsPage && (
+        <div ref={categoriesHeaderRef} style={{ top: `${headerHeight}px` }}>
+          <CategoriesHeader />
+        </div>
+      )}
 
       {/* Main content area with appropriate top margin */}
       <main className={`${isBlogsPage ? 'mt-28' : 'mt-16'} flex-1 relative`}>
         {children}
-        <ScrollToTopButton /> {/* Move ScrollToTopButton inside main */}
+        <ScrollToTopButton />
       </main>
 
       <Footer />
