@@ -7,37 +7,37 @@ import ContactUs from '@/components/ContactUs';
 import TestimonialsSection from '@/components/TestimonialsSection';
 
 const Index = () => {
-    return (
-      <div>
-        <section id="hero-section" className="py-12 my-5">
-          <HeroSection />
-        </section>
-  
-        {/* <section id="carousel" className="py-12 my-5">
-          <Carousel />
-        </section> */}
-  
-        <section id="subscription-pricing" className="py-12 my-5">
-          <SubscriptionPricing />
-        </section>
-  
-        <section id="about-us" className="py-12 my-5">
-          <AboutUs />
-        </section>
-  
-        <section id="testimonials-selection" className="py-12 my-5">
-          <TestimonialsSection />
-        </section>
+  return (
+    <div>
+      <section id="hero-section" className="py-12 my-5">
+        <HeroSection />
+      </section>
 
-        <section id="features" className="py-12 my-5">
-          <Features />
-        </section>
+      {/* <section id="carousel" className="py-12 my-5">
+        <Carousel />
+      </section> */}
 
-        <section id="contact-us" className="py-12 my-5">
-          <ContactUs />
-        </section>
-      </div>
-    );
-  };
+      <section id="subscription-pricing" className="py-12 my-5">
+        <SubscriptionPricing />
+      </section>
+
+      <section id="about-us" className="py-12 my-5">
+        <AboutUs />
+      </section>
+
+      <section id="testimonials-selection" className="py-12 my-5">
+        <TestimonialsSection />
+      </section>
+
+      <section id="features" className="py-12 my-5">
+        <Features />
+      </section>
+
+      <section id="contact-us" className="py-12 my-5">
+        <ContactUs />
+      </section>
+    </div>
+  );
+};
 
 export default Index;

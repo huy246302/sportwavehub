@@ -36,58 +36,31 @@ const testimonials: Testimonial[] = [
 
 const TestimonialsSection: React.FC = () => {
     return (
-        <section style={{ padding: '2rem', textAlign: 'center' }}>
-            <h2 style={{ fontSize: '1.5rem', marginBottom: '1.5rem' }}>
-                What the Experts Are Saying
-            </h2>
-            <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem' }}>
-                {testimonials.map((testimonial, index) => (
+            <section className="py-16 text-center">
+                <h2 className="text-2xl font-bold mb-6">What the Experts Are Saying</h2>
+                <div className="flex flex-wrap justify-center gap-4">
+                    {testimonials.map((testimonial, index) => (
                     <div
                         key={index}
-                        className='grid justify-items-center'
-                        style={{
-                            backgroundColor: '#f9f9f9',
-                            padding: '1rem',
-                            borderRadius: '0.5rem',
-                            maxWidth: '300px',
-                            boxShadow: '0 2px 10px rgba(0, 0, 0, 0.1)',
-                        }}
+                        className='bg-white p-6 rounded-lg shadow-md max-w-xs'
                     >
-                        <div style={{ position: 'relative', marginBottom: '1rem' }}>
-                            <Image
-                                src={testimonial.imageSrc}
-                                alt={testimonial.name}
-                                width={50}
-                                height={50}
-                                style={{ borderRadius: '50%' }}
-                            />
-                            <div
-                                style={{
-                                    position: 'absolute',
-                                    top: '-10px',
-                                    left: '35px',
-                                    color: '#3b82f6',
-                                    fontSize: '2rem',
-                                }}
-                            >
-                                &rdquo;
-                            </div>
+                        <div className="relative mb-4">
+                        <Image
+                            src={testimonial.imageSrc}
+                            alt={testimonial.name}
+                            width={50}
+                            height={50}
+                            className="rounded-full"
+                        />
+                        <div className="absolute top-0 left-0 text-blue-500 text-3xl mt-1 ml-1">&rdquo;</div>
                         </div>
-                        <div style={{ textAlign: 'left' }}>
-                            <p style={{ fontStyle: 'italic', marginBottom: '1rem' }}>
-                                {testimonial.quote}
-                            </p>
-                            <p style={{ fontWeight: 'bold', marginBottom: '0.25rem' }}>
-                                {testimonial.name}
-                            </p>
-                            <p style={{ color: '#555', fontSize: '0.875rem' }}>
-                                {testimonial.title} at {testimonial.company}
-                            </p>
-                        </div>
+                        <p className="italic mb-2">{testimonial.quote}</p>
+                        <p className="font-semibold">{testimonial.name}</p>
+                        <p className="text-gray-500 text-sm">{testimonial.title} at {testimonial.company}</p>
                     </div>
-                ))}
-            </div>
-        </section>
+                    ))}
+                </div>
+            </section>
     );
 };
 

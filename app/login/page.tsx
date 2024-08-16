@@ -5,7 +5,7 @@
 import React, { Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import { signIn, signUp } from '../../actions/actions';
+import { signIn } from '../../actions/actions';
 import { SubmitButton } from './submit-button';
 import '@/styles/globals.css';
 
@@ -63,13 +63,12 @@ const LoginContent: React.FC = () => {
         >
           Login
         </SubmitButton>
-        <SubmitButton
-          formAction={signUp}
-          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground mb-2"
-          pendingText="Signing Up..."
+        <Link
+          href="/register"
+          className="border border-foreground/20 rounded-md px-4 py-2 text-foreground text-center no-underline mb-2"
         >
           Register
-        </SubmitButton>
+        </Link>
         {message && (
           <p className="mt-4 p-4 bg-foreground/10 text-foreground text-center">
             {message}
